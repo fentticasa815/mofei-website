@@ -1,0 +1,2119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>墨非 MOFEI | 艺术家具设计师 · FENTTI CASA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ink-black: #0d0d0d;
+            --ink-charcoal: #1a1a1a;
+            --charcoal-gray: #2d2d2d;
+            --warm-white: #faf8f5;
+            --cream: #f5f0e8;
+            --beige: #e8e2d7;
+            --gold: #c9a962;
+            --bronze: #8b7355;
+            --soft-gold: #d4c4a8;
+            --dusty-rose: #c4a7a7;
+            --sage: #9caa9e;
+            --midnight: #0a0f14;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Cormorant Garamond', 'Noto Serif SC', serif;
+            background: var(--warm-white);
+            color: var(--ink-charcoal);
+            line-height: 1.9;
+            overflow-x: hidden;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--midnight);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-content {
+            text-align: center;
+        }
+
+        .preloader-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 6vw, 4rem);
+            color: var(--warm-white);
+            letter-spacing: 0.5em;
+            font-weight: 300;
+            margin-bottom: 20px;
+            position: relative;
+            animation: inkDrop 2s ease-out forwards;
+        }
+
+        .preloader-logo::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .preloader-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            color: var(--soft-gold);
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease 0.8s forwards;
+        }
+
+        @keyframes inkDrop {
+            0% { opacity: 0; letter-spacing: 1em; filter: blur(10px); }
+            100% { opacity: 1; letter-spacing: 0.5em; filter: blur(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), var(--dusty-rose), var(--gold));
+            z-index: 10001;
+            width: 0;
+            transition: width 0.1s ease;
+            box-shadow: 0 0 10px rgba(201, 169, 98, 0.5);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 30px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(250, 248, 245, 0.98);
+            padding: 20px 80px;
+            box-shadow: 0 4px 40px rgba(0,0,0,0.06);
+            backdrop-filter: blur(20px);
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 0.35em;
+            color: var(--ink-charcoal);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
+
+        .logo::before {
+            content: '✦';
+            font-size: 0.6rem;
+            color: var(--gold);
+            opacity: 0.6;
+        }
+
+        .logo-en {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.35em;
+            color: var(--gold);
+            font-weight: 300;
+            text-transform: uppercase;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+            color: var(--ink-charcoal);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            font-weight: 400;
+            position: relative;
+            padding: 8px 0;
+            text-transform: uppercase;
+            transition: color 0.4s ease;
+        }
+
+        .nav-menu a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -15px;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.4s ease, left 0.4s ease;
+            transform: translateY(-50%);
+        }
+
+        .nav-menu a:hover::before {
+            width: 10px;
+            left: -20px;
+        }
+
+        .nav-menu a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            width: 55%;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(10, 15, 20, 0.3) 0%, transparent 50%, rgba(10, 15, 20, 0.2) 100%);
+            z-index: 2;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transform: scale(1.1);
+            animation: heroZoom 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroZoom {
+            0% { transform: scale(1.1); }
+            100% { transform: scale(1.2); }
+        }
+
+        .hero-content {
+            width: 45%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 100px;
+            background: linear-gradient(180deg, var(--warm-white) 0%, var(--cream) 100%);
+            position: relative;
+        }
+
+        .hero-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 60%;
+            background: linear-gradient(180deg, transparent, var(--gold), transparent);
+            opacity: 0.5;
+        }
+
+        .hero-decoration {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            width: 80px;
+            height: 80px;
+            border: 1px solid var(--gold);
+            opacity: 0.3;
+            transform: rotate(45deg);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-decoration::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--gold);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: rotate(45deg) translateY(0); }
+            50% { transform: rotate(45deg) translateY(-10px); }
+        }
+
+        .hero-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.6em;
+            color: var(--gold);
+            margin-bottom: 35px;
+            position: relative;
+            display: inline-block;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        .hero-label::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .hero-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            margin-bottom: 10px;
+            line-height: 1.1;
+            color: var(--ink-charcoal);
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: 0.3em;
+            color: var(--bronze);
+            margin-bottom: 45px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.7s forwards;
+        }
+
+        .hero-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            color: var(--charcoal-gray);
+            line-height: 2.2;
+            padding: 30px 0 30px 35px;
+            border-left: 2px solid var(--gold);
+            margin-bottom: 50px;
+            position: relative;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.9s forwards;
+        }
+
+        .hero-quote::before {
+            content: '✦';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            font-size: 0.8rem;
+            color: var(--gold);
+        }
+
+        .hero-cta {
+            opacity: 0;
+            animation: fadeInUp 1s ease 1.1s forwards;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 18px 55px;
+            background: var(--ink-charcoal);
+            color: var(--warm-white);
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(201, 169, 98, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold);
+            color: var(--ink-charcoal);
+            box-shadow: 0 10px 40px rgba(201, 169, 98, 0.3);
+        }
+
+        /* Section Common */
+        .section {
+            padding: 150px 80px;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 100px;
+            position: relative;
+        }
+
+        .section-decoration {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-decoration::before {
+            content: '◆';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.8rem;
+            color: var(--gold);
+            background: var(--warm-white);
+            padding: 0 20px;
+        }
+
+        .section-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.5em;
+            color: var(--gold);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        /* Parallax Section */
+        .parallax-section {
+            position: relative;
+            height: 70vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .parallax-bg {
+            position: absolute;
+            top: -20%;
+            left: 0;
+            width: 100%;
+            height: 140%;
+            background: url('images/photography/photo-space-1.jpg') center/cover no-repeat;
+            will-change: transform;
+        }
+
+        .parallax-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(10, 15, 20, 0.4) 0%, rgba(10, 15, 20, 0.6) 50%, rgba(10, 15, 20, 0.4) 100%);
+        }
+
+        .parallax-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: var(--warm-white);
+            max-width: 800px;
+            padding: 60px;
+        }
+
+        .parallax-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+            font-weight: 300;
+            font-style: italic;
+            line-height: 2.2;
+            letter-spacing: 0.1em;
+            margin-bottom: 30px;
+        }
+
+        .parallax-author {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.4em;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--cream);
+            position: relative;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(201, 169, 98, 0.03));
+            pointer-events: none;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 100px;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+        }
+
+        .about-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 650px;
+            object-fit: cover;
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: -20px;
+            bottom: -20px;
+            border: 1px solid var(--gold);
+            z-index: -1;
+            opacity: 0.5;
+            transition: all 0.6s ease;
+        }
+
+        .about-image-wrapper:hover::before {
+            top: 30px;
+            left: 30px;
+            right: -30px;
+            bottom: -30px;
+        }
+
+        .about-image-frame {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            right: -30px;
+            bottom: -30px;
+            border: 1px solid var(--gold);
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .about-content {
+            position: relative;
+        }
+
+        .about-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            margin-bottom: 35px;
+            color: var(--ink-charcoal);
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .about-content h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .about-content p {
+            font-size: 0.95rem;
+            color: var(--charcoal-gray);
+            line-height:;
+            margin-bottom 2.2: 25px;
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid var(--beige);
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+            padding-top: 50px;
+            border-top: 1px solid var(--beige);
+            position: relative;
+        }
+
+        .about-stats::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .about-stat {
+            text-align: center;
+            position: relative;
+        }
+
+        .about-stat::before {
+            content: '◆';
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.5rem;
+            color: var(--gold);
+            opacity: 0.6;
+        }
+
+        .about-stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--gold);
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .about-stat-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--charcoal-gray);
+            text-transform: uppercase;
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+            background: var(--midnight);
+            color: var(--warm-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .philosophy::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(201,169,98,0.03)"/></svg>');
+            background-size: 50px 50px;
+            opacity: 0.5;
+        }
+
+        .philosophy .section-title {
+            color: var(--warm-white);
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .philosophy-card {
+            padding: 60px 45px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .philosophy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--dusty-rose));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s ease;
+        }
+
+        .philosophy-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .philosophy-card:hover {
+            background: rgba(255,255,255,0.04);
+            transform: translateY(-15px);
+            border-color: rgba(201, 169, 98, 0.2);
+        }
+
+        .philosophy-icon {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            display: block;
+            color: var(--gold);
+            position: relative;
+        }
+
+        .philosophy-icon::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 30px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .philosophy-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            margin-bottom: 25px;
+            color: var(--warm-white);
+        }
+
+        .philosophy-card p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 2;
+            font-weight: 300;
+        }
+
+        /* Brand Section */
+        .brand {
+            background: linear-gradient(180deg, var(--warm-white) 0%, var(--cream) 100%);
+            position: relative;
+        }
+
+        .brand-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 80px;
+            border: 1px solid var(--beige);
+            position: relative;
+        }
+
+        .brand-content::before,
+        .brand-content::after {
+            content: '✦';
+            position: absolute;
+            font-size: 0.8rem;
+            color: var(--gold);
+        }
+
+        .brand-content::before {
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .brand-content::after {
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .brand-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 0.4em;
+            margin-bottom: 25px;
+            color: var(--ink-charcoal);
+            position: relative;
+            display: inline-block;
+        }
+
+        .brand-logo::before,
+        .brand-logo::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .brand-logo::before {
+            right: calc(100% + 20px);
+        }
+
+        .brand-logo::after {
+            left: calc(100% + 20px);
+        }
+
+        .brand-tagline {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.5em;
+            color: var(--gold);
+            margin-bottom: 50px;
+            text-transform: uppercase;
+        }
+
+        .brand-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--charcoal-gray);
+            line-height: 2.4;
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+
+        .brand-logos {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .brand-logos::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .brand-reference {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            color: var(--charcoal-gray);
+            letter-spacing: 0.15em;
+            font-style: italic;
+            padding: 10px 20px;
+            border: 1px solid var(--beige);
+            transition: all 0.4s ease;
+        }
+
+        .brand-reference:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        /* Systems Section */
+        .systems {
+            background: var(--cream);
+            position: relative;
+        }
+
+        .systems-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .system-card {
+            background: white;
+            overflow: hidden;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .system-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .system-card:hover::before {
+            opacity: 1;
+        }
+
+        .system-card:hover {
+            transform: translateY(-20px);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.08);
+        }
+
+        .system-image {
+            height: 300px;
+            background: linear-gradient(145deg, var(--charcoal-gray), var(--ink-charcoal));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--gold);
+            opacity: 0.9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .system-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(201, 169, 98, 0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 1s ease;
+        }
+
+        .system-card:hover .system-image::after {
+            transform: translateX(100%);
+        }
+
+        .system-content {
+            padding: 45px 40px;
+            position: relative;
+        }
+
+        .system-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.4em;
+            color: var(--gold);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .system-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            margin-bottom: 18px;
+        }
+
+        .system-card p {
+            font-size: 0.9rem;
+            color: var(--charcoal-gray);
+            line-height: 2;
+            font-weight: 300;
+        }
+
+        /* Calligraphy Section */
+        .poetry {
+            background: var(--midnight);
+            color: var(--warm-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .poetry-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .poetry-card {
+            padding: 60px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            position: relative;
+            transition: all 0.6s ease;
+        }
+
+        .poetry-card:hover {
+            background: rgba(255,255,255,0.03);
+            border-color: rgba(201, 169, 98, 0.2);
+        }
+
+        .poetry-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: linear-gradient(180deg, var(--gold), var(--dusty-rose));
+            transition: height 0.6s ease;
+        }
+
+        .poetry-card:hover::before {
+            height: 100%;
+        }
+
+        .poetry-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .poetry-image {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: contain;
+            background: rgba(255,255,255,0.02);
+            transition: transform 0.8s ease;
+        }
+
+        .poetry-card:hover .poetry-image {
+            transform: scale(1.02);
+        }
+
+        .poetry-meta {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+        }
+
+        .poetry-meta::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 20px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .poetry-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 25px;
+            letter-spacing: 0.1em;
+            font-style: italic;
+        }
+
+        .poetry-excerpt {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 2.2;
+            font-style: italic;
+            position: relative;
+            padding-left: 20px;
+            border-left: 1px solid rgba(201, 169, 98, 0.3);
+        }
+
+        .poetry-citation {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .poetry-citation::before {
+            content: '—';
+        }
+
+        /* Photography Section - Artistic Galleryography {
+            background */
+        .phot: var(--cream);
+            position: relative;
+        }
+
+        .photography::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(201, 169, 98, 0.02) 0%, transparent 70%);
+        }
+
+        .photography-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .photo-masonry {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(2, 350px);
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .photo-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.1);
+            filter: brightness(0.85);
+        }
+
+        .photo-card:first-child {
+            grid-column: span 6;
+            grid-row: span 2;
+        }
+
+        .photo-card:nth-child(2) {
+            grid-column: span 3;
+        }
+
+        .photo-card:nth-child(3) {
+            grid-column: span 3;
+        }
+
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px;
+            background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 60%);
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .photo-card:hover .photo-overlay {
+            transform: translateY(0);
+        }
+
+        .photo-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.15em;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+
+        .photo-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            opacity: 0.7;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .photo-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(255,255,255,0.1);
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .photo-card:hover::before {
+            opacity: 1;
+        }
+
+        .photo-card-decoration {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            border: 1px solid rgba(255,255,255,0.5);
+            opacity: 0;
+            transform: rotate(45deg);
+            transition: all 0.6s ease 0.2s;
+            z-index: 3;
+        }
+
+        .photo-card:hover .photo-card-decoration {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+
+        .photo-card-decoration::before,
+        .photo-card-decoration::after {
+            content: '';
+            position: absolute;
+            background: rgba(255,255,255,0.8);
+        }
+
+        .photo-card-decoration::before {
+            width: 10px;
+            height: 1px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .photo-card-decoration::after {
+            width: 1px;
+            height: 10px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Quote Section */
+        .quote-section {
+            padding: 180px 80px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--cream) 0%, var(--warm-white) 50%, var(--cream) 100%);
+            position: relative;
+        }
+
+        .quote-section::before {
+            content: '❋';
+            font-size: 2rem;
+            color: var(--gold);
+            opacity: 0.3;
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .quote-text {
+            max-width: 900px;
+            margin: 0 auto;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-weight: 300;
+            line-height: 2.4;
+            letter-spacing: 0.1em;
+            font-style: italic;
+            position: relative;
+        }
+
+        .quote-text::before {
+            content: '"';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 4rem;
+            color: var(--gold);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+
+        .quote-author {
+            margin-top: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            color: var(--gold);
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+        }
+
+        .quote-author::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--midnight);
+            color: var(--warm-white);
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(201, 169, 98, 0.05) 0%, transparent 50%);
+        }
+
+        .contact .section-title {
+            color: var(--warm-white);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-info {
+            position: relative;
+        }
+
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -40px;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, var(--gold), transparent);
+            opacity: 0.3;
+        }
+
+        .contact-info h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            margin-bottom: 35px;
+            color: var(--warm-white);
+        }
+
+        .contact-info p {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 2.2;
+            margin-bottom: 45px;
+            font-weight: 300;
+        }
+
+        .contact-list {
+            list-style: none;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            padding: 25px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.4s ease;
+        }
+
+        .contact-list li:hover {
+            padding-left: 15px;
+            border-color: rgba(201, 169, 98, 0.3);
+        }
+
+        .contact-list i {
+            width: 55px;
+            height: 55px;
+            background: rgba(255,255,255,0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 1rem;
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.4s ease;
+        }
+
+        .contact-list li:hover i {
+            background: rgba(201, 169, 98, 0.1);
+            border-color: var(--gold);
+        }
+
+        .contact-list span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .brand-card {
+            background: rgba(255,255,255,0.02);
+            padding: 70px 50px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.06);
+            position: relative;
+        }
+
+        .brand-card::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 100px);
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .brand-card-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            margin-bottom: 25px;
+        }
+
+        .brand-card-tagline {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            color: var(--gold);
+            letter-spacing: 0.3em;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        .brand-card p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 2;
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--ink-black);
+            color: var(--warm-white);
+            padding: 80px 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 0.4em;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-logo::before,
+        .footer-logo::after {
+            content: '✦';
+            font-size: 0.6rem;
+            color: var(--gold);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .footer-logo::before {
+            left: -30px;
+        }
+
+        .footer-logo::after {
+            right: -30px;
+        }
+
+        .footer-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            opacity: 0.4;
+            letter-spacing: 0.15em;
+            font-weight: 300;
+        }
+
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Responsive */
+        @media (max-width: 1400px) {
+            .hero-content {
+                padding: 80px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .hero {
+                flex-direction: column;
+            }
+
+            .hero-image,
+            .hero-content {
+                width: 100%;
+                height: auto;
+            }
+
+            .hero-image {
+                height: 55vh;
+            }
+
+            .hero-content {
+                height: auto;
+                padding: 100px 60px;
+            }
+
+            .philosophy-grid,
+            .systems-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .poetry-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .contact-info::before {
+                display: none;
+            }
+
+            .photo-masonry {
+                grid-template-rows: repeat(3, 300px);
+            }
+
+            .photo-card:first-child {
+                grid-column: span 6;
+                grid-row: span 1;
+            }
+
+            .photo-card:nth-child(2),
+            .photo-card:nth-child(3) {
+                grid-column: span 3;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 20px 30px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .section {
+                padding: 100px 30px;
+            }
+
+            .hero-content {
+                padding: 80px 30px;
+            }
+
+            .philosophy-grid,
+            .systems-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .brand-logos {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .photo-masonry {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+
+            .photo-card:first-child,
+            .photo-card:nth-child(2),
+            .photo-card:nth-child(3) {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">墨非</div>
+            <div class="preloader-subtitle">MOFEI · 艺术家具设计师</div>
+        </div>
+    </div>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="logo">
+            墨非
+            <span class="logo-en">MOFEI</span>
+        </a>
+        <ul class="nav-menu">
+            <li><a href="#about">关于</a></li>
+            <li><a href="#philosophy">理念</a></li>
+            <li><a href="#systems">系统</a></li>
+            <li><a href="#calligraphy">书法</a></li>
+            <li><a href="#photography">摄影</a></li>
+            <li><a href="#contact">联系</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-image">
+            <img src="images/hero/designer.jpg" alt="墨非 - 家具设计师">
+        </div>
+        <div class="hero-content">
+            <div class="hero-decoration"></div>
+            <p class="hero-label">Founder & Designer</p>
+            <h1 class="hero-name">墨非</h1>
+            <p class="hero-title">MOFEI · 艺术家具设计师</p>
+            <blockquote class="hero-quote">
+                "家，是灵魂的最后一块自留地。<br>
+                在墨非装饰主义的世界里，<br>
+                每一寸空间都是个性的延伸，<br>
+                每一次呼吸都是艺术的共鸣。"
+            </blockquote>
+            <div class="hero-cta">
+                <a href="#contact" class="btn-primary">探索定制</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax Quote Section -->
+    <section class="parallax-section" id="parallax">
+        <div class="parallax-bg" id="parallaxBg"></div>
+        <div class="parallax-overlay"></div>
+        <div class="parallax-content reveal">
+            <p class="parallax-quote">
+                "每一件家具都是一首无声的诗，<br>
+                诉说着关于生活、美与永恒的故事。"
+            </p>
+            <p class="parallax-author">— 墨非</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="section-header">
+            <div class="section-decoration"></div>
+            <p class="section-label">About</p>
+            <h2 class="section-title">关于墨非</h2>
+        </div>
+        <div class="about-grid">
+            <div class="about-image-wrapper reveal-left">
+                <div class="about-image">
+                    <img src="images/team/founder.jpg" alt="墨非工作室">
+                </div>
+                <div class="about-image-frame"></div>
+            </div>
+            <div class="about-content reveal-right">
+                <h3>后时代墨非装饰主义创始人</h3>
+                <p>墨非（MOFEI），1979年10月5日出生，中国知名家具设计师，深耕室内设计、铝制品定制与木作行业15年。</p>
+                <p>作为"后时代墨非装饰主义"的创始人，墨非将古典文学底蕴与现代工业设计完美结合，创立了<strong>FENTTI CASA</strong>高端定制品牌，致力于打造"珠宝级建筑家具"。</p>
+                <p>2019年担任联邦设计总监，拥有250㎡工作室和300㎡厂房，打通设计、生产、安装全流程。</p>
+                <div class="about-stats">
+                    <div class="about-stat">
+                        <div class="about-stat-number">15+</div>
+                        <div class="about-stat-label">行业经验</div>
+                    </div>
+                    <div class="about-stat">
+                        <div class="about-stat-number">250m²</div>
+                        <div class="about-stat-label">工作室</div>
+                    </div>
+                    <div class="about-stat">
+                        <div class="about-stat-number">300m²</div>
+                        <div class="about-stat-label">厂房</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="section philosophy" id="philosophy">
+        <div class="section-header">
+            <p class="section-label">Philosophy</p>
+            <h2 class="section-title reveal">设计哲学</h2>
+        </div>
+        <div class="philosophy-grid">
+            <div class="philosophy-card reveal">
+                <span class="philosophy-icon">✦</span>
+                <h3>后时代墨非装饰主义</h3>
+                <p>融合顶级奢侈品牌精髓的全新家具设计语言，将BVLGARI的熔金工艺、Visionnaire的钢饰革命、Fendi的柔饰哲学、Rimadesio的极简重构、Roberto Cavalli的野性表达、Versace的内敛奢华完美融合。</p>
+            </div>
+            <div class="philosophy-card reveal">
+                <span class="philosophy-icon">✦</span>
+                <h3>珠宝级建筑家具</h3>
+                <p>将传统的家具设计提升到了艺术收藏品的层级，为现代居住空间注入诗意与灵魂。每一件作品都是对空间艺术的重新定义。</p>
+            </div>
+            <div class="philosophy-card reveal">
+                <span class="philosophy-icon">✦</span>
+                <h3>感官进化论</h3>
+                <p>让家具成为艺术品，实现"感官进化论"。不仅仅是功能性的满足，更是视觉、触觉、情感的全方位体验升级。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Section -->
+    <section class="section brand" id="brand">
+        <div class="brand-content reveal-scale">
+            <div class="brand-logo">FENTTI CASA</div>
+            <p class="brand-tagline">墨非高端定制实验室</p>
+            <p class="brand-text">
+                为全球1%的灵魂定制艺术避难所。<br>
+                墨非高端定制实验室，承载着对空间美学的极致追求。
+            </p>
+            <div class="brand-logos">
+                <span class="brand-reference">BVLGARI</span>
+                <span class="brand-reference">Visionnaire</span>
+                <span class="brand-reference">Fendi</span>
+                <span class="brand-reference">Rimadesio</span>
+                <span class="brand-reference">Versace</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Systems Section -->
+    <section class="section systems" id="systems">
+        <div class="section-header">
+            <div class="section-decoration"></div>
+            <p class="section-label">Core Systems</p>
+            <h2 class="section-title reveal">三大核心家具系统</h2>
+        </div>
+        <div class="systems-grid">
+            <div class="system-card reveal">
+                <div class="system-image">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <div class="system-content">
+                    <span class="system-number">01</span>
+                    <h3>有机骨架系统</h3>
+                    <p>CNC高精工艺驱动的异形五金与曲线重构，打破传统家具的方正界限，让每一件家具都拥有生命的律动感。</p>
+                </div>
+            </div>
+            <div class="system-card reveal">
+                <div class="system-image">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <div class="system-content">
+                    <span class="system-number">02</span>
+                    <h3>感官材质宣言</h3>
+                    <p>跨界金属涂装与顶级材质应用，将BVLGARI熔金技术、皮钢共生技术融入家居空间，触感与视觉的双重享受。</p>
+                </div>
+            </div>
+            <div class="system-card reveal">
+                <div class="system-image">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="system-content">
+                    <span class="system-number">03</span>
+                    <h3>智能呼吸系统</h3>
+                    <p>空间情绪调节与场景化沉浸灯效，让家具能够感知居住者的情绪，创造最舒适的空间氛围。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calligraphy Section -->
+    <section class="section poetry" id="calligraphy">
+        <div class="section-header">
+            <p class="section-label">Calligraphy</p>
+            <h2 class="section-title reveal">书法艺术</h2>
+        </div>
+        <div class="poetry-grid">
+            <div class="poetry-card reveal">
+                <div class="poetry-image-wrapper">
+                    <img src="images/calligraphy/shilin.jpg" alt="《石林》书法作品" class="poetry-image">
+                </div>
+                <p class="poetry-meta">书法作品</p>
+                <h3 class="poetry-title">《石林》</h3>
+                <p class="poetry-excerpt">
+                    移情闹市避繁华，宁作山池嵌素雅...<br>
+                    浅浅浅，人生可曾虚度！
+                </p>
+                <p class="poetry-citation">—— 行书偏草书</p>
+            </div>
+            <div class="poetry-card reveal">
+                <div class="poetry-image-wrapper">
+                    <img src="images/calligraphy/chenfeng.jpg" alt="《尘封》书法作品" class="poetry-image">
+                </div>
+                <p class="poetry-meta">书法作品</p>
+                <h3 class="poetry-title">《尘封》</h3>
+                <p class="poetry-excerpt">
+                    是记忆风干了累，还是你蛮腰化蝶的沉睡？<br>
+                    打破了苍穹有罪，埋葬在沙漠中...
+                </p>
+                <p class="poetry-citation">—— 现代诗书融合</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photography Section -->
+    <section class="section photography" id="photography">
+        <div class="section-header">
+            <div class="section-decoration"></div>
+            <p class="section-label">Photography</p>
+            <h2 class="section-title reveal">空间摄影</h2>
+        </div>
+        <div class="photography-container">
+            <div class="photo-masonry">
+                <div class="photo-card reveal">
+                    <img src="images/photography/photo-space-1.jpg" alt="空间摄影作品 1">
+                    <div class="photo-card-decoration"></div>
+                    <div class="photo-overlay">
+                        <p class="photo-title">空间作品 01</p>
+                        <p class="photo-desc">家具设计案例展示</p>
+                    </div>
+                </div>
+                <div class="photo-card reveal">
+                    <img src="images/photography/photo-space-2.jpg" alt="空间摄影作品 2">
+                    <div class="photo-card-decoration"></div>
+                    <div class="photo-overlay">
+                        <p class="photo-title">空间作品 02</p>
+                        <p class="photo-desc">家具设计案例展示</p>
+                    </div>
+                </div>
+                <div class="photo-card reveal">
+                    <img src="images/photography/photo-space-3.jpg" alt="空间摄影作品 3">
+                    <div class="photo-card-decoration"></div>
+                    <div class="photo-overlay">
+                        <p class="photo-title">空间作品 03</p>
+                        <p class="photo-desc">家具设计案例展示</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="quote-section">
+        <div class="quote-text reveal">
+            "家，是灵魂的最后一块自留地。<br>
+            在墨非装饰主义的世界里，<br>
+            每一寸空间都是个性的延伸，<br>
+            每一次呼吸都是艺术的共鸣。"
+        </div>
+        <p class="quote-author">— 墨非</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="section-header">
+            <p class="section-label">Contact</p>
+            <h2 class="section-title reveal">联系我们</h2>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info reveal-left">
+                <h3>开启您的定制之旅</h3>
+                <p>我们期待与您相遇，共同探索空间的可能性。为全球1%的灵魂定制艺术避难所。</p>
+                <ul class                    <li>
+                        <i class="contact-list">
+="fas fa-phone"></i>
+                        <span>155 5552 2212</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>浙江省温岭市城东街道萧南村曾家55号</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>FENTTI CASA</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-store"></i>
+                        <span>250㎡工作室 + 300㎡厂房</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="brand-card reveal-right">
+                <div class="brand-card-logo">FENTTI CASA</div>
+                <p class="brand-card-tagline">墨非高端定制实验室</p>
+                <p>珠宝级建筑家具<br>为全球1%的灵魂定制艺术避难所</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">墨非 MOFEI</div>
+        <p class="footer-text">© 2025 FENTTI CASA · 后时代墨非装饰主义 · 保留所有权利</p>
+    </footer>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.preloader').classList.add('hidden');
+            }, 2500);
+        });
+
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            scrollProgress.style.width = progress + '%';
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Parallax Effect
+        window.addEventListener('scroll', () => {
+            const parallaxBg = document.getElementById('parallaxBg');
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * 0.4;
+            if (parallaxBg) {
+                parallaxBg.style.transform = `translateY(${rate}px)`;
+            }
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Reveal on Scroll Animation
+        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // Stagger animation for cards
+        const staggerCards = document.querySelectorAll('.philosophy-card, .system-card, .poetry-card');
+        staggerCards.forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.15}s`;
+        });
+
+        // Parallax elements
+        const parallaxSection = document.querySelector('.parallax-section');
+        if (parallaxSection) {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * 0.3;
+                const content = parallaxSection.querySelector('.parallax-content');
+                if (content && scrolled < parallaxSection.offsetHeight) {
+                    content.style.transform = `translateY(${rate}px)`;
+                    content.style.opacity = 1 - (scrolled / parallaxSection.offsetHeight);
+                }
+            });
+        }
+
+        // Magnetic effect for buttons
+        const btn = document.querySelector('.btn-primary');
+        if (btn) {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0)';
+            });
+        }
+
+        console.log('🌿 墨非 MOFEI 艺术官网 - 后时代墨非装饰主义');
+    </script>
+</body>
+</html>

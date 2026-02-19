@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>墨非 MOFEI | 艺术家具设计师 · FENTTI CASA</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #1a1a1a;
+            --accent: #c9a962;
+            --light: #f5f5f5;
+            --text: #333;
+        }
+        
+        body {
+            font-family: 'Noto Serif SC', 'Songti SC', serif;
+            line-height: 1.8;
+            color: var(--text);
+            background: var(--light);
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav .logo {
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/Users/tingzhizeng/opencode-images/images/hero/designer.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+        }
+        
+        .hero blockquote {
+            font-size: 1.2rem;
+            max-width: 600px;
+            font-style: italic;
+            opacity: 0.9;
+        }
+        
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+        
+        #about {
+            background: #fff;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-content img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 3rem;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        #philosophy {
+            background: var(--primary);
+            color: #fff;
+        }
+        
+        #philosophy .section-title {
+            color: #fff;
+        }
+        
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .philosophy-item {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .philosophy-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .brands {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .brand {
+            font-size: 1.2rem;
+            color: var(--accent);
+            letter-spacing: 0.2rem;
+        }
+        
+        #systems {
+            background: #fff;
+        }
+        
+        .systems-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .system-card {
+            padding: 2rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .system-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .system-number {
+            font-size: 4rem;
+            color: var(--accent);
+            opacity: 0.3;
+            font-weight: bold;
+        }
+        
+        .system-card h3 {
+            margin: 1rem 0;
+            font-size: 1.5rem;
+        }
+        
+        .material-showcase {
+            margin-top: 1rem;
+        }
+        
+        .material-showcase img {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        
+        .material-caption {
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+        
+        #equipment {
+            background: var(--primary);
+            color: #fff;
+        }
+        
+        #equipment .section-title {
+            color: #fff;
+        }
+        
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        
+        .equipment-category {
+            padding: 2rem;
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 8px;
+        }
+        
+        .equipment-category h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .equipment-category ul {
+            list-style: none;
+        }
+        
+        .equipment-category li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .equipment-category li:last-child {
+            border-bottom: none;
+        }
+        
+        #calligraphy {
+            background: #fff;
+        }
+        
+        .calligraphy-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        
+        .calligraphy-item {
+            text-align: center;
+        }
+        
+        .calligraphy-item img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        
+        .calligraphy-content {
+            padding: 1.5rem;
+        }
+        
+        .calligraphy-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .calligraphy-text {
+            font-style: italic;
+            color: #666;
+        }
+        
+        #photography {
+            background: var(--primary);
+            color: #fff;
+        }
+        
+        #photography .section-title {
+            color: #fff;
+        }
+        
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        
+        .photo-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        
+        .photo-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .photo-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 2rem 1rem 1rem;
+            color: #fff;
+        }
+        
+        #contact {
+            background: #fff;
+            text-align: center;
+        }
+        
+        .contact-info {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-info p {
+            margin: 1rem 0;
+        }
+        
+        .contact-info i {
+            color: var(--accent);
+            margin-right: 0.5rem;
+            width: 20px;
+        }
+        
+        footer {
+            background: var(--primary);
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .about-content,
+            .philosophy-grid,
+            .systems-grid,
+            .equipment-grid,
+            .calligraphy-grid,
+            .photo-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#" class="logo">墨非 MOFEI</a>
+        <ul>
+            <li><a href="#about">关于</a></li>
+            <li><a href="#philosophy">理念</a></li>
+            <li><a href="#systems">系统</a></li>
+            <li><a href="#equipment">设备</a></li>
+            <li><a href="#calligraphy">书法</a></li>
+            <li><a href="#photography">摄影</a></li>
+            <li><a href="#contact">联系</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>墨非</h1>
+        <p class="subtitle">MOFEI · 艺术家具设计师</p>
+        <blockquote>
+            "家，是灵魂的最后一块自留地。<br>
+            在墨非装饰主义的世界里，<br>
+            每一寸空间都是个性的延伸，<br>
+            每一次呼吸都是艺术的共鸣。"
+        </blockquote>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">About<br>关于墨非</h2>
+        <div class="about-content">
+            <img src="/Users/tingzhizeng/opencode-images/images/team/founder.jpg" alt="墨非工作室">
+            <div>
+                <h3>后时代墨非装饰主义创始人</h3>
+                <p>墨非（MOFEI），1979年10月5日出生，中国知名家具设计师，深耕室内设计、铝制品定制与木作行业15年。</p>
+                <p>作为"后时代墨非装饰主义"的创始人，墨非将古典文学底蕴与现代工业设计完美结合，创立了<strong>FENTTI CASA</strong>高端定制品牌，致力于打造"珠宝级建筑家具"。</p>
+                <p>2019年担任联邦设计总监，拥有250㎡工作室和300㎡厂房，打通设计、生产、安装全流程。</p>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-number">15+</div>
+                        <div>行业经验</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">250m²</div>
+                        <div>工作室</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">300m²</div>
+                        <div>厂房</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="philosophy">
+        <h2 class="section-title">Philosophy<br>设计哲学</h2>
+        <div class="philosophy-grid">
+            <div class="philosophy-item">
+                <div class="philosophy-icon">✦</div>
+                <h3>后时代墨非装饰主义</h3>
+                <p>融合顶级奢侈品牌精髓的全新家具设计语言，将BVLGARI的熔金工艺、Visionnaire的钢饰革命、Fendi的柔饰哲学、Rimadesio的极简重构、Roberto Cavalli的野性表达、Versace的内敛奢华完美融合。</p>
+            </div>
+            <div class="philosophy-item">
+                <div class="philosophy-icon">✦</div>
+                <h3>珠宝级建筑家具</h3>
+                <p>将传统的家具设计提升到了艺术收藏品的层级，为现代居住空间注入诗意与灵魂。每一件作品都是对空间艺术的重新定义。</p>
+            </div>
+            <div class="philosophy-item">
+                <div class="philosophy-icon">✦</div>
+                <h3>感官进化论</h3>
+                <p>让家具成为艺术品，实现"感官进化论"。不仅仅是功能性的满足，更是视觉、触觉、情感的全方位体验升级。</p>
+            </div>
+        </div>
+        <div class="brands">
+            <span class="brand">BVLGARI</span>
+            <span class="brand">Visionnaire</span>
+            <span class="brand">Fendi</span>
+            <span class="brand">Rimadesio</span>
+            <span class="brand">Versace</span>
+        </div>
+    </section>
+
+    <section id="systems">
+        <h2 class="section-title">Core Systems<br>三大核心家具系统</h2>
+        <div class="systems-grid">
+            <div class="system-card">
+                <div class="system-number">01</div>
+                <h3>有机骨架系统</h3>
+                <p>CNC高精工艺驱动的异形五金与曲线重构，打破传统家具的方正界限，让每一件家具都拥有生命的律动感。</p>
+            </div>
+            <div class="system-card">
+                <div class="system-number">02</div>
+                <h3>感官材质宣言</h3>
+                <p>跨界金属涂装与顶级材质应用，将BVLGARI熔金技术、皮钢共生技术融入家居空间，触感与视觉的双重享受。</p>
+                <div class="material-showcase">
+                    <img src="/Users/tingzhizeng/Documents/我的资料/mofei-website-images/images/FENTTI材质.jpg" alt="FENTTI材质展示">
+                    <p class="material-caption">FENTTI 材质探索</p>
+                </div>
+            </div>
+            <div class="system-card">
+                <div class="system-number">03</div>
+                <h3>智能呼吸系统</h3>
+                <p>空间情绪调节与场景化沉浸灯效，让家具能够感知居住者的情绪，创造最舒适的空间氛围。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="equipment">
+        <h2 class="section-title">Equipment<br>设备清单</h2>
+        <div class="equipment-grid">
+            <div class="equipment-category">
+                <h3><i class="fas fa-server"></i> 计算与服务器设备</h3>
+                <ul>
+                    <li>Windows RTX3060 笔记本 - 主服务器，承担核心算力任务</li>
+                    <li>2019款 MacBook Pro A2141 - 无头骑士服务器，后台服务运行</li>
+                    <li>iMac A1312 台式机 - 闲置备用设备</li>
+                </ul>
+            </div>
+            <div class="equipment-category">
+                <h3><i class="fas fa-desktop"></i> 显示与交互设备</h3>
+                <ul>
+                    <li>2017款 iPad Pro 12.9英寸 - 搭配A2141无头服务器使用，通过手机热点作为无线显示器</li>
+                </ul>
+            </div>
+            <div class="equipment-category">
+                <h3><i class="fas fa-glasses"></i> AR智能设备</h3>
+                <ul>
+                    <li>INAIR 2 Pro AR眼镜 - 空间多屏扩展、远程串流、AI六屏办公使用</li>
+                </ul>
+            </div>
+            <div class="equipment-category">
+                <h3><i class="fas fa-car"></i> 交通工具</h3>
+                <ul>
+                    <li>新能源汽车 - 随车配备400W 52V光伏折叠板、40A MPPT控制器、2.8度磷酸铁锂电池组，支持太阳能独立供电</li>
+                </ul>
+            </div>
+            <div class="equipment-category">
+                <h3><i class="fas fa-camera"></i> 影像设备</h3>
+                <ul>
+                    <li>佳能1DX 专业单反机身</li>
+                    <li>佳能 EF 17-40mm F4L 红圈广角镜头</li>
+                </ul>
+            </div>
+            <div class="equipment-category">
+                <h3><i class="fas fa-industry"></i> 生产设备</h3>
+                <ul>
+                    <li>1325雕刻机</li>
+                    <li>板式封边机</li>
+                    <li>伺服测孔机</li>
+                    <li>CNC铝制品钻铣一体机</li>
+                    <li>准发双头锯斜切一体机</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="calligraphy">
+        <h2 class="section-title">Calligraphy<br>书法艺术</h2>
+        <div class="calligraphy-grid">
+            <div class="calligraphy-item">
+                <img src="/Users/tingzhizeng/opencode-images/images/calligraphy/shilin.jpg" alt="石林">
+                <div class="calligraphy-content">
+                    <h3 class="calligraphy-title">《石林》</h3>
+                    <p class="calligraphy-text">移情闹市避繁华，宁作山池嵌素雅...<br>浅浅浅，人生可曾虚度！<br>—— 行书偏草书</p>
+                </div>
+            </div>
+            <div class="calligraphy-item">
+                <img src="/Users/tingzhizeng/opencode-images/images/calligraphy/chenfeng.jpg" alt="尘封">
+                <div class="calligraphy-content">
+                    <h3 class="calligraphy-title">《尘封》</h3>
+                    <p class="calligraphy-text">是记忆风干了累，还是你蛮腰化蝶的沉睡？<br>打破了苍穹有罪，埋葬在沙漠中...<br>—— 现代诗书融合</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="photography">
+        <h2 class="section-title">Photography<br>空间摄影</h2>
+        <div class="photo-grid">
+            <div class="photo-item">
+                <img src="/Users/tingzhizeng/opencode-images/images/photography/photo-space-1.jpg" alt="空间作品 01">
+                <div class="photo-overlay">
+                    <h4>空间作品 01</h4>
+                    <p>家具设计案例展示</p>
+                </div>
+            </div>
+            <div class="photo-item">
+                <img src="/Users/tingzhizeng/opencode-images/images/photography/photo-space-2.jpg" alt="空间作品 02">
+                <div class="photo-overlay">
+                    <h4>空间作品 02</h4>
+                    <p>家具设计案例展示</p>
+                </div>
+            </div>
+            <div class="photo-item">
+                <img src="/Users/tingzhizeng/opencode-images/images/photography/photo-space-3.jpg" alt="空间作品 03">
+                <div class="photo-overlay">
+                    <h4>空间作品 03</h4>
+                    <p>家具设计案例展示</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Contact<br>联系我们</h2>
+        <div class="contact-info">
+            <h3>开启您的定制之旅</h3>
+            <p>我们期待与您相遇，共同探索空间的可能性。为全球1%的灵魂定制艺术避难所。</p>
+            <p><i class="fas fa-phone"></i> 155 5552 2212</p>
+            <p><i class="fas fa-map-marker-alt"></i> 浙江省温岭市城东街道萧南村曾家55号</p>
+            <p><i class="fas fa-building"></i> FENTTI CASA</p>
+            <p>250㎡工作室 + 300㎡厂房</p>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>FENTTI CASA</strong> 墨非高端定制实验室</p>
+        <p>珠宝级建筑家具 · 为全球1%的灵魂定制艺术避难所</p>
+        <p>墨非 MOFEI © 2025 FENTTI CASA · 后时代墨非装饰主义 · 保留所有权利</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(26, 26, 26, 1)';
+            } else {
+                nav.style.background = 'rgba(26, 26, 26, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>

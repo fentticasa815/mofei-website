@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FENTTI CASA | 后时代墨非装饰主义 - 数字工业设计系统</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #1a1a1a;
+            --accent: #c9a962;
+            --accent-dark: #a08040;
+            --light: #f8f8f8;
+            --text: #333;
+            --text-light: #666;
+            --gold-gradient: linear-gradient(135deg, #c9a962 0%, #e8d5a3 50%, #c9a962 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', serif;
+            line-height: 1.8;
+            color: var(--text);
+            background: var(--light);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.98);
+            padding: 1.2rem 3rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201, 169, 98, 0.1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gold-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .logo-text {
+            color: #fff;
+            font-size: 1.5rem;
+            letter-spacing: 0.3rem;
+        }
+        
+        .logo-text span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+        
+        nav a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 0.1rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section - 3D Space Effect */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+        
+        .hero-bg-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('mofei-website-images/images/1_A/主页原始搞155.png') center/cover;
+            opacity: 0.6;
+            transform: translateZ(-50px) scale(1.2);
+            animation: heroZoom 20s ease-in-out infinite;
+        }
+        
+        @keyframes heroZoom {
+            0%, 100% { transform: translateZ(-50px) scale(1.2); }
+            50% { transform: translateZ(-30px) scale(1.1); }
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(201, 169, 98, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(201, 169, 98, 0.1) 0%, transparent 50%),
+                linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
+        }
+        
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 15s infinite;
+        }
+        
+        .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; top: 80%; animation-delay: 2s; }
+        .particle:nth-child(3) { left: 30%; top: 40%; animation-delay: 4s; }
+        .particle:nth-child(4) { left: 50%; top: 60%; animation-delay: 1s; }
+        .particle:nth-child(5) { left: 70%; top: 30%; animation-delay: 3s; }
+        .particle:nth-child(6) { left: 80%; top: 70%; animation-delay: 5s; }
+        .particle:nth-child(7) { left: 90%; top: 50%; animation-delay: 2.5s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.6; }
+            25% { transform: translateY(-30px) translateX(10px); opacity: 0.8; }
+            50% { transform: translateY(-20px) translateX(-10px); opacity: 0.4; }
+            75% { transform: translateY(-40px) translateX(5px); opacity: 0.7; }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            transform: translateZ(0);
+        }
+        
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 300;
+            letter-spacing: 1rem;
+            margin-bottom: 1rem;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: heroTitleFade 1.5s ease-out, heroTitleFloat 3s ease-in-out infinite;
+            text-shadow: 0 0 60px rgba(201, 169, 98, 0.3);
+        }
+        
+        @keyframes heroTitleFade {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes heroTitleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            letter-spacing: 0.5rem;
+            animation: heroSubFade 1.5s ease-out 0.3s both;
+        }
+        
+        @keyframes heroSubFade {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+            line-height: 2;
+            animation: heroTagFade 1.5s ease-out 0.6s both;
+        }
+        
+        @keyframes heroTagFade {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+        
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 300;
+            letter-spacing: 1rem;
+            margin-bottom: 1rem;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            letter-spacing: 0.5rem;
+        }
+        
+        .hero .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+            line-height: 2;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-indicator i {
+            color: var(--accent);
+            font-size: 2rem;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 8rem 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+        
+        .section-label {
+            font-size: 0.9rem;
+            color: var(--accent);
+            letter-spacing: 0.3rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            color: var(--primary);
+            font-weight: 300;
+            letter-spacing: 0.2rem;
+        }
+        
+        .section-divider {
+            width: 80px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1.5rem auto;
+        }
+        
+        /* Philosophy Section */
+        #philosophy {
+            background: var(--primary);
+            color: #fff;
+        }
+        
+        #philosophy .section-title {
+            color: #fff;
+        }
+        
+        .philosophy-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            font-size: 1.2rem;
+            opacity: 0.9;
+            line-height: 2;
+        }
+        
+        .keywords-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .keyword-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(201, 169, 98, 0.2);
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .keyword-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gold-gradient);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+        
+        .keyword-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+        
+        .keyword-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .keyword-chinese {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+        
+        .keyword-english {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .keyword-desc {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+        
+        /* Core Systems Section */
+        #coresystems {
+            background: #fff;
+        }
+        
+        .systems-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .system-card {
+            background: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.4s;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+        
+        .system-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+        }
+        
+        .system-icon {
+            height: 200px;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .system-icon i {
+            font-size: 4rem;
+            color: var(--accent);
+            z-index: 1;
+        }
+        
+        .system-icon::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(201, 169, 98, 0.2);
+            border-radius: 50%;
+        }
+        
+        .system-content {
+            padding: 2.5rem;
+        }
+        
+        .system-number {
+            font-size: 4rem;
+            color: rgba(201, 169, 98, 0.15);
+            font-weight: bold;
+            line-height: 1;
+            margin-bottom: -1rem;
+        }
+        
+        .system-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .system-desc {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        
+        /* Digital System Section */
+        #digitalsystem {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #digitalsystem::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(201, 169, 98, 0.1) 0%, transparent 70%);
+        }
+        
+        #digitalsystem .section-title {
+            color: #fff;
+        }
+        
+        .system-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 4rem;
+            position: relative;
+        }
+        
+        .flow-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            padding: 0 1rem;
+        }
+        
+        .flow-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+        
+        .flow-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(201, 169, 98, 0.1);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .flow-step:hover .flow-icon {
+            background: var(--accent);
+            transform: scale(1.1);
+        }
+        
+        .flow-step:hover .flow-icon i {
+            color: var(--primary);
+        }
+        
+        .flow-icon i {
+            font-size: 1.8rem;
+            color: var(--accent);
+            transition: color 0.3s;
+        }
+        
+        .flow-title {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .flow-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+        
+        .flow-device {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+        
+        /* Equipment Section */
+        #equipment {
+            background: #fff;
+        }
+        
+        .equipment-showcase {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+        
+        .equipment-card {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 2rem;
+            padding: 2rem;
+            background: var(--light);
+            border-radius: 12px;
+            transition: all 0.4s;
+            border: 1px solid transparent;
+        }
+        
+        .equipment-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        .equipment-icon {
+            width: 150px;
+            height: 150px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .equipment-icon i {
+            font-size: 3.5rem;
+            color: var(--accent);
+        }
+        
+        .equipment-info h3 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .equipment-model {
+            color: var(--accent);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .equipment-function {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        
+        .equipment-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .equipment-tag {
+            padding: 0.3rem 0.8rem;
+            background: rgba(201, 169, 98, 0.1);
+            color: var(--accent-dark);
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        /* Value Section */
+        #value {
+            background: var(--primary);
+            color: #fff;
+        }
+        
+        #value .section-title {
+            color: #fff;
+        }
+        
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .value-item {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(201, 169, 98, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .value-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .value-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gold-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .value-icon i {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+        
+        .value-title {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .value-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+        
+        /* Brand Elements */
+        .brand-elements {
+            margin-top: 4rem;
+            text-align: center;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-top: 1px solid rgba(201, 169, 98, 0.2);
+            border-bottom: 1px solid rgba(201, 169, 98, 0.2);
+        }
+        
+        .brand-label {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            letter-spacing: 0.3rem;
+            margin-bottom: 2rem;
+        }
+        
+        .brand-logos {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .brand-logo {
+            color: var(--accent);
+            font-size: 1.2rem;
+            letter-spacing: 0.15rem;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .brand-logo:hover {
+            opacity: 1;
+        }
+        
+        /* Contact Section */
+        #contact {
+            background: #fff;
+        }
+        
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+        
+        .contact-info h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-desc {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 2;
+        }
+        
+        .contact-details {
+            list-style: none;
+        }
+        
+        .contact-details li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .contact-details li:last-child {
+            border-bottom: none;
+        }
+        
+        .contact-details i {
+            width: 40px;
+            height: 40px;
+            background: var(--gold-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+        
+        .contact-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .contact-stat {
+            text-align: center;
+            padding: 2rem;
+            background: var(--light);
+            border-radius: 8px;
+        }
+        
+        .contact-stat-number {
+            font-size: 2.5rem;
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        .contact-stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+        
+        .contact-cta {
+            background: var(--primary);
+            padding: 4rem;
+            border-radius: 12px;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .contact-cta h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        .contact-cta p {
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            line-height: 2;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--gold-gradient);
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 0.1rem;
+            border-radius: 50px;
+            transition: all 0.3s;
+            align-self: center;
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(201, 169, 98, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(201, 169, 98, 0.1);
+        }
+        
+        footer p {
+            margin: 0.5rem 0;
+        }
+        
+        footer .brand {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .keywords-grid,
+            .systems-showcase,
+            .value-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .system-flow {
+                flex-wrap: wrap;
+                gap: 2rem;
+            }
+            
+            .flow-step {
+                flex: 0 0 45%;
+            }
+            
+            .flow-step:not(:last-child)::after {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+                letter-spacing: 0.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .keywords-grid,
+            .systems-showcase,
+            .equipment-showcase,
+            .value-grid,
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            .flow-step {
+                flex: 0 0 100%;
+            }
+            
+            nav {
+                padding: 1rem;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .contact-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <div class="logo-icon">M</div>
+            <div class="logo-text">FENTTI <span>CASA</span></div>
+        </div>
+        <ul>
+            <li><a href="#about">关于</a></li>
+            <li><a href="#philosophy">哲学</a></li>
+            <li><a href="#coresystems">核心系统</a></li>
+            <li><a href="#digitalsystem">数字系统</a></li>
+            <li><a href="#equipment">设备矩阵</a></li>
+            <li><a href="#value">商业价值</a></li>
+            <li><a href="#contact">联系</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bg-layer"></div>
+        <div class="hero-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="hero-content">
+            <h1>墨非</h1>
+            <p class="subtitle">MOFEI · FENTTI CASA</p>
+            <p class="tagline">
+                后时代墨非装饰主义 · 全链路数字工业设计生产落地闭环系统<br>
+                珠宝级建筑家具 · 为全球1%的灵魂定制艺术避难所
+            </p>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Designer Section - Pop Art Fashion Style -->
+    <section id="about" style="background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%); padding: 8rem 0; position: relative; overflow: hidden;">
+        <!-- Pop Art Background Elements -->
+        <div style="position: absolute; top: 5%; left: 5%; width: 200px; height: 200px; border: 3px solid var(--accent); opacity: 0.2; transform: rotate(15deg); animation: rotate 20s linear infinite;"></div>
+        <div style="position: absolute; bottom: 10%; right: 8%; width: 150px; height: 150px; background: var(--accent); opacity: 0.1; border-radius: 50%;"></div>
+        <div style="position: absolute; top: 50%; left: 3%; width: 100px; height: 100px; border: 2px solid var(--accent); opacity: 0.15; transform: rotate(-30deg);"></div>
+        
+        <div class="container" style="position: relative; z-index: 1;">
+            <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem; align-items: center; max-width: 1400px; margin: 0 auto;">
+                <!-- Designer Photo - 4:3 Aspect Ratio with Dramatic Frame -->
+                <div class="designer-photo-wrapper" style="position: relative;">
+                    <!-- Main Photo Frame -->
+                    <div style="position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; border-radius: 4px; box-shadow: 0 30px 60px rgba(0,0,0,0.5);">
+                        <img src="mofei-website-images/images/0_关于/墨非设计师形像照片.png" alt="墨非设计师" style="width: 100%; height: 100%; object-fit: cover; filter: contrast(1.1) saturate(1.1);">
+                        <!-- Overlay Gradient -->
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 40%; background: linear-gradient(transparent, rgba(0,0,0,0.8));"></div>
+                    </div>
+                    <!-- Decorative Frame Elements -->
+                    <div style="position: absolute; top: -20px; left: -20px; right: 20px; bottom: 20px; border: 3px solid var(--accent); z-index: -1; opacity: 0.6;"></div>
+                    <div style="position: absolute; top: 20px; left: 20px; right: -20px; bottom: -20px; border: 1px solid rgba(255,255,255,0.2); z-index: -2;"></div>
+                </div>
+                
+                <!-- Founder Badge - Moved to right side info area -->
+                <div style="display: inline-flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                    <div style="width: 60px; height: 60px; background: var(--gold-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 25px rgba(201, 169, 98, 0.4); flex-shrink: 0;">
+                        <span style="color: #0a0a0a; font-weight: bold; font-size: 0.55rem; text-align: center; line-height: 1.2;">FOUNDER</span>
+                    </div>
+                    <span style="color: var(--accent); font-size: 1.1rem; letter-spacing: 0.1rem;">创始人</span>
+                </div>
+                
+                <!-- Designer Info - Bold Typography -->
+                <div class="designer-info" style="color: #fff;">
+                    <!-- Label -->
+                    <div style="display: inline-block; padding: 0.5rem 1.5rem; background: var(--accent); color: #0a0a0a; font-weight: bold; font-size: 0.85rem; letter-spacing: 0.2rem; margin-bottom: 1.5rem; transform: rotate(-2deg);">DESIGNER PROFILE</div>
+                    
+                    <!-- Main Title -->
+                    <h2 style="font-size: 5rem; font-weight: 900; line-height: 1; margin-bottom: 0.5rem; background: linear-gradient(90deg, #fff 0%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: none; filter: drop-shadow(0 10px 20px rgba(201, 169, 98, 0.3));">
+                        墨非
+                    </h2>
+                    <h3 style="font-size: 1.8rem; color: var(--accent); margin-bottom: 2rem; font-weight: 300; letter-spacing: 0.3rem;">MOFEI</h3>
+                    
+                    <!-- Tagline -->
+                    <p style="font-size: 1.3rem; color: rgba(255,255,255,0.9); margin-bottom: 2rem; line-height: 1.8; font-style: italic; border-left: 4px solid var(--accent); padding-left: 1.5rem;">
+                        "后时代墨非装饰主义"创始人<br>
+                        <span style="font-size: 1rem; color: rgba(255,255,255,0.6);">打造「珠宝级建筑家具」</span>
+                    </p>
+                    
+                    <!-- Description -->
+                    <p style="line-height: 2.2; color: rgba(255,255,255,0.75); margin-bottom: 1.5rem; font-size: 1.05rem;">
+                        1979年10月5日出生，中国知名家具设计师，深耕室内设计、铝制品定制与木作行业<strong style="color: var(--accent);">15年</strong>。
+                    </p>
+                    <p style="line-height: 2.2; color: rgba(255,255,255,0.75); margin-bottom: 2.5rem; font-size: 1.05rem;">
+                        将古典文学底蕴与现代工业设计完美结合，创立<strong style="color: var(--accent); font-size: 1.3rem;">FENTTI CASA</strong>高端定制品牌。2019年担任联邦设计总监，打通设计、生产、安装全流程。
+                    </p>
+                    
+                    <!-- Stats with Bold Design -->
+                    <div style="display: flex; gap: 3rem; margin-top: 3rem; padding-top: 2.5rem; border-top: 2px solid rgba(201, 169, 98, 0.3);">
+                        <div style="text-align: center;">
+                            <div style="font-size: 3.5rem; font-weight: 900; color: var(--accent); line-height: 1;">15+</div>
+                            <div style="font-size: 0.9rem; color: rgba(255,255,255,0.5); letter-spacing: 0.1rem;">YEARS EXP<br>行业经验</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 3.5rem; font-weight: 900; color: var(--accent); line-height: 1;">250㎡</div>
+                            <div style="font-size: 0.9rem; color: rgba(255,255,255,0.5); letter-spacing: 0.1rem;">STUDIO<br>工作室</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 3.5rem; font-weight: 900; color: var(--accent); line-height: 1;">300㎡</div>
+                            <div style="font-size: 0.9rem; color: rgba(255,255,255,0.5); letter-spacing: 0.1rem;">FACTORY<br>厂房</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <style>
+            @keyframes rotate {
+                from { transform: rotate(15deg); }
+                to { transform: rotate(375deg); }
+            }
+        </style>
+    </section>
+
+    <section id="philosophy">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Philosophy</p>
+                <h2 class="section-title">后时代墨非装饰主义</h2>
+                <div class="section-divider"></div>
+            </div>
+            <p class="philosophy-intro">
+                以后时代墨非装饰主义为设计美学内核，融合数字科技与实体生产，<br>
+                打通创意AI生成、数字设计渲染、现场交互优化、自动化加工制造、产品交付落地全流程链路，<br>
+                构建美学创意、数字算力、工业生产无断点衔接的专属闭环体系。
+            </p>
+            <div class="keywords-grid">
+                <div class="keyword-card" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('mofei-website-images/images/2_B/解构.png') center/cover; background-size: cover;">
+                    <div class="keyword-chinese">解构</div>
+                    <div class="keyword-english">Deconstruction</div>
+                    <p class="keyword-desc">打破传统家具的方正界限，分解固有形态，释放空间想象力</p>
+                </div>
+                <div class="keyword-card" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('mofei-website-images/images/2_B/秩序.png') center/cover; background-size: cover;">
+                    <div class="keyword-chinese">秩序</div>
+                    <div class="keyword-english">Order</div>
+                    <p class="keyword-desc">在解构中重建秩序，让每一件作品都拥有精密的几何美感</p>
+                </div>
+                <div class="keyword-card" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('mofei-website-images/images/2_B/重建.png') center/cover; background-size: cover;">
+                    <div class="keyword-chinese">重建</div>
+                    <div class="keyword-english">Reconstruction</div>
+                    <p class="keyword-desc">融合东西方美学元素，重构当代居住空间的艺术表达</p>
+                </div>
+                <div class="keyword-card" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('mofei-website-images/images/2_B/无界.png') center/cover; background-size: cover;">
+                    <div class="keyword-chinese">无界</div>
+                    <div class="keyword-english">Boundless</div>
+                    <p class="keyword-desc">打破材质、空间、功能的边界，实现跨界融合的无限可能</p>
+                </div>
+                <div class="keyword-card" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('mofei-website-images/images/2_B/融合.png') center/cover; background-size: cover;">
+                    <div class="keyword-chinese">融合</div>
+                    <div class="keyword-english">Integration</div>
+                    <p class="keyword-desc">将BVLGARI熔金工艺、Visionnaire钢饰革命、Fendi柔饰哲学完美融合</p>
+                </div>
+                <div class="keyword-card" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('mofei-website-images/images/2_B/本真.png') center/cover; background-size: cover;">
+                    <div class="keyword-chinese">本真</div>
+                    <div class="keyword-english">Authenticity</div>
+                    <p class="keyword-desc">回归材料本质，让每一件家具都能讲述自己的故事</p>
+                </div>
+            </div>
+            <div class="brand-elements">
+                <p class="brand-label">DESIGN INFLUENCES</p>
+                <div class="brand-logos">
+                    <span class="brand-logo">BVLGARI</span>
+                    <span class="brand-logo">Visionnaire</span>
+                    <span class="brand-logo">Fendi</span>
+                    <span class="brand-logo">Rimadesio</span>
+                    <span class="brand-logo">Versace</span>
+                    <span class="brand-logo">Roberto Cavalli</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="coresystems">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Core Systems</p>
+                <h2 class="section-title">三大核心家具系统</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="systems-showcase">
+                <div class="system-card">
+                    <div class="system-icon">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <div class="system-content">
+                        <div class="system-number">01</div>
+                        <h3 class="system-title">有机骨架系统</h3>
+                        <p class="system-desc">CNC高精工艺驱动的异形五金与曲线重构，打破传统家具的方正界限，让每一件家具都拥有生命的律动感。精密计算的结构力学与美学形态完美融合。</p>
+                    </div>
+                </div>
+                <div class="system-card">
+                    <div class="system-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <div class="system-content">
+                        <div class="system-number">02</div>
+                        <h3 class="system-title">感官材质宣言</h3>
+                        <p class="system-desc">跨界金属涂装与顶级材质应用，将BVLGARI熔金技术、皮钢共生技术融入家居空间。触感与视觉的双重享受，让每一次触碰都是奢华体验。</p>
+                    </div>
+                </div>
+                <div class="system-card">
+                    <div class="system-icon">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <div class="system-content">
+                        <div class="system-number">03</div>
+                        <h3 class="system-title">智能呼吸系统</h3>
+                        <p class="system-desc">空间情绪调节与场景化沉浸灯效，让家具能够感知居住者的情绪。智能感应系统创造最舒适的空间氛围，实现"感官进化论"。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="digitalsystem">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Digital System</p>
+                <h2 class="section-title">全链路数字工业设计生产落地闭环系统</h2>
+                <div class="section-divider"></div>
+            </div>
+            <p class="philosophy-intro" style="color: rgba(255,255,255,0.8);">
+                以后时代墨非装饰主义为设计美学内核，融合数字科技与实体生产，<br>
+                打通创意AI生成、数字设计渲染、现场交互优化、自动化加工制造、产品交付落地全流程链路，<br>
+                构建美学创意、数字算力、工业生产无断点衔接的专属闭环体系。
+            </p>
+            <div class="system-flow">
+                <div class="flow-step">
+                    <div class="flow-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h4 class="flow-title">01. 美学创意生成</h4>
+                    <p class="flow-desc">依托RTX3060算力中枢，通过AI工具生成契合后时代墨非装饰主义的设计草图、效果图与结构概念</p>
+                    <div class="flow-device">Windows RTX3060 笔记本<br>AI创意算力中枢</div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-icon">
+                        <i class="fas fa-pencil-ruler"></i>
+                    </div>
+                    <h4 class="flow-title">02. 数字设计精修</h4>
+                    <p class="flow-desc">A2141无头设备承接创意素材，开展专业建模、图纸绘制、效果渲染，输出高精度数字工程文件</p>
+                    <div class="flow-device">MacBook Pro A2141<br>数字设计渲染核心</div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h4 class="flow-title">03. 现场场景优化</h4>
+                    <p class="flow-desc">iPad Pro完成现场勘测、客户沟通与方案手绘修改，数据同步迭代设计，确保方案贴合落地场景</p>
+                    <div class="flow-device">iPad Pro 12.9"<br>现场交互优化终端</div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h4 class="flow-title">04. 工业加工生产</h4>
+                    <p class="flow-desc">定稿数字文件导入CNC生产设备，自动化加工铝制板材，完成产品工业化生产与成型</p>
+                    <div class="flow-device">CNC铝制板式生产设备<br>工业生产落地载体</div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h4 class="flow-title">05. 展示交付闭环</h4>
+                    <p class="flow-desc">AR眼镜呈现虚拟展示效果，搭配实体成品完成交付，形成从美学理念到实体产品的全链路闭环</p>
+                    <div class="flow-device">INAIR 2 Pro AR眼镜<br>虚拟展示终端</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="equipment">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Equipment Matrix</p>
+                <h2 class="section-title">核心硬件支撑矩阵</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="equipment-showcase">
+                <div class="equipment-card">
+                    <div class="equipment-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="equipment-info">
+                        <h3>AI创意算力中枢</h3>
+                        <p class="equipment-model">Windows RTX3060 笔记本</p>
+                        <p class="equipment-function">全职服务器，稳定运行Stable Diffusion等AI设计工具，承担本地大模型推理、创意素材生成、视觉效果加速工作，为墨非装饰主义美学创意提供底层算力支撑。</p>
+                        <div class="equipment-tags">
+                            <span class="equipment-tag">AI生成</span>
+                            <span class="equipment-tag">算力支撑</span>
+                            <span class="equipment-tag">本地部署</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="equipment-card">
+                    <div class="equipment-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <div class="equipment-info">
+                        <h3>数字设计渲染核心</h3>
+                        <p class="equipment-model">MacBook Pro A2141 (i7/5300M 无头版)</p>
+                        <p class="equipment-function">工作室接驳34寸三星带鱼屏完成高精度建模、工程图纸绘制、材质效果渲染；出差联动AR眼镜实现虚拟大屏设计展示与操作，兼顾专业设计效率与移动场景适配。</p>
+                        <div class="equipment-tags">
+                            <span class="equipment-tag">3D建模</span>
+                            <span class="equipment-tag">工程制图</span>
+                            <span class="equipment-tag">效果渲染</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="equipment-card">
+                    <div class="equipment-icon">
+                        <i class="fas fa-tablet-alt"></i>
+                    </div>
+                    <div class="equipment-info">
+                        <h3>现场交互优化终端</h3>
+                        <p class="equipment-model">iPad Pro 12.9英寸 二代</p>
+                        <p class="equipment-function">搭配手写笔实现现场勘测拍照、设计方案手绘批注、客户需求实时修改，同步联动A2141更新设计数据，填补传统设备现场交互短板，保障设计方案贴合落地场景。</p>
+                        <div class="equipment-tags">
+                            <span class="equipment-tag">现场勘测</span>
+                            <span class="equipment-tag">手绘批注</span>
+                            <span class="equipment-tag">实时修改</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="equipment-card">
+                    <div class="equipment-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="equipment-info">
+                        <h3>工业生产落地载体</h3>
+                        <p class="equipment-model">自有CNC铝制板式生产设备</p>
+                        <p class="equipment-function">承接数字端精准工程图纸，完成铝制家具、定制护墙板等产品的自动化加工、组装，实现设计美学的工业化实体落地。全程自主把控品质与交期。</p>
+                        <div class="equipment-tags">
+                            <span class="equipment-tag">CNC加工</span>
+                            <span class="equipment-tag">铝制家具</span>
+                            <span class="equipment-tag">定制生产</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="value">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Commercial Value</p>
+                <h2 class="section-title">核心商业价值</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="value-grid">
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h4 class="value-title">差异化美学标签</h4>
+                    <p class="value-desc">以后时代墨非装饰主义打造行业差异化美学标签，融合顶级奢侈品牌精髓，建立独特品牌识别度。</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h4 class="value-title">双平台效率升级</h4>
+                    <p class="value-desc">Windows+Mac双平台数字设备协同，AI算力与专业设计软件完美配合，实现效率几何级提升。</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h4 class="value-title">全环节自控生产</h4>
+                    <p class="value-desc">自有CNC工业设备把控生产落地全环节，从设计到成品全程自主，确保品质与交期可控。</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4 class="value-title">一站式交付能力</h4>
+                    <p class="value-desc">兼具科技感展示体验、极致工作效率与一站式交付能力，构建行业核心竞争力。</p>
+                </div>
+            </div>
+            <div class="value-grid" style="margin-top: 2rem;">
+                <div class="value-item" style="grid-column: span 2;">
+                    <div class="value-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h4 class="value-title">解决行业痛点</h4>
+                    <p class="value-desc">直击传统装饰行业三大痛点：设计与生产脱节、现场与后台不同步、落地周期长，提供完整解决方案。</p>
+                </div>
+                <div class="value-item" style="grid-column: span 2;">
+                    <div class="value-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h4 class="value-title">美学+数字+工业 核心竞争力</h4>
+                    <p class="value-desc">行业独有的三位一体核心竞争力，将美学创意、数字算力、工业生产完美融合，打造不可复制的竞争优势。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Contact</p>
+                <h2 class="section-title">开启您的定制之旅</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3>FENTTI CASA</h3>
+                    <p class="contact-desc">我们期待与您相遇，共同探索空间的可能性。为全球1%的灵魂定制艺术避难所。</p>
+                    <ul class="contact-details">
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>155 5552 2212</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>浙江省温岭市城东街道萧南村曾家55号</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-building"></i>
+                            <span>FENTTI CASA · 250㎡工作室 + 300㎡厂房</span>
+                        </li>
+                    </ul>
+                    <div class="contact-stats">
+                        <div class="contact-stat">
+                            <div class="contact-stat-number">15+</div>
+                            <div class="contact-stat-label">行业经验</div>
+                        </div>
+                        <div class="contact-stat">
+                            <div class="contact-stat-number">500+</div>
+                            <div class="contact-stat-label">完成项目</div>
+                        </div>
+                        <div class="contact-stat">
+                            <div class="contact-stat-number">99%</div>
+                            <div class="contact-stat-label">客户满意度</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-cta" style="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('mofei-website-images/images/7_G/FENTTI材质.jpg') center/cover; background-size: cover;">
+                    <h3>定制专属空间</h3>
+                    <p>从概念灵感到实体产品，<br>我们为您提供一站式全链路服务</p>
+                    <a href="tel:15555522212" class="cta-button">立即咨询</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="brand">FENTTI CASA</p>
+            <p>墨非高端定制实验室 · 后时代墨非装饰主义</p>
+            <p>珠宝级建筑家具 · 为全球1%的灵魂定制艺术避难所</p>
+            <p style="margin-top: 2rem; opacity: 0.5;">墨非 MOFEI © 2025 FENTTI CASA · 保留所有权利</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(10, 10, 10, 1)';
+            } else {
+                nav.style.background = 'rgba(10, 10, 10, 0.98)';
+            }
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.keyword-card, .system-card, .flow-step, .equipment-card, .value-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        setTimeout(() => {
+            document.querySelectorAll('.keyword-card, .system-card, .flow-step, .equipment-card, .value-item').forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        }, 500);
+    </script>
+</body>
+</html>

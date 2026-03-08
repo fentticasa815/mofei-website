@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FENTTI CASA | 墨非 - 后时代墨非装饰主义</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #1a1a1a;
+            --accent: #c9a962;
+            --accent-light: #e8d5a3;
+            --text: #ffffff;
+            --text-muted: rgba(255,255,255,0.6);
+            /* 品牌配色 */
+            --tiffany: #81DCEB;
+            --louboutin: #EE1D23;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Noto Serif SC', 'Source Han Serif SC', serif;
+            background: var(--primary);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(201,169,98,0.1);
+        }
+        .logo { font-size: 1.6rem; font-weight: 300; letter-spacing: 0.3rem; }
+        .logo span { color: var(--accent); }
+        nav ul { display: flex; list-style: none; gap: 3rem; }
+        nav a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.1rem; transition: 0.3s; }
+        nav a:hover { color: var(--accent); }
+        
+        /* Hero Section - Full Screen */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('mofei-website-images/images/all/主页原始搞155.png') center/cover;
+            opacity: 0.5;
+            filter: contrast(1.2) brightness(0.8);
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.4) 50%, rgba(10,10,10,0.8) 100%);
+        }
+        /* Geometric Elements */
+        .geo-shape {
+            position: absolute;
+            border: 1px solid var(--accent);
+            opacity: 0.3;
+        }
+        .geo-1 { width: 300px; height: 300px; top: 10%; left: -100px; transform: rotate(45deg); animation: rotate 30s linear infinite; }
+        .geo-2 { width: 200px; height: 200px; bottom: 20%; right: 10%; border-radius: 50%; animation: pulse 4s ease-in-out infinite; }
+        .geo-3 { width: 150px; height: 150px; top: 30%; right: 20%; transform: rotate(15deg); }
+        .geo-4 { width: 100px; height: 100px; bottom: 40%; left: 15%; border-radius: 50%; border-color: var(--accent-light); opacity: 0.2; }
+        
+        @keyframes rotate { from { transform: rotate(45deg); } to { transform: rotate(405deg); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.1); opacity: 0.5; } }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            margin-left: 15%;
+            animation: slideIn 1.2s ease-out;
+        }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        
+        .hero h1 {
+            font-size: 7rem;
+            font-weight: 100;
+            letter-spacing: 1rem;
+            line-height: 1;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--text) 0%, var(--accent-light) 50%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero .subtitle { font-size: 1.5rem; color: var(--accent); letter-spacing: 0.8rem; margin-bottom: 2rem; }
+        .hero .tagline { font-size: 1.1rem; color: var(--text-muted); font-style: italic; max-width: 500px; line-height: 1.8; }
+        
+        /* Section Base */
+        section { padding: 8rem 5%; position: relative; }
+        
+        /* About Section - Asymmetric Layout */
+        #about { background: var(--primary); }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 8rem;
+            align-items: center;
+        }
+        .about-img-wrap {
+            position: relative;
+            padding: 2rem;
+        }
+        .about-img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            filter: contrast(1.1) saturate(0.9);
+        }
+        .about-img-frame {
+            position: absolute;
+            top: 0; left: 0; right: -3rem; bottom: 3rem;
+            border: 2px solid var(--accent);
+            z-index: -1;
+        }
+        .about-label {
+            display: inline-block;
+            color: var(--accent);
+            letter-spacing: 0.4rem;
+            font-size: 0.8rem;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--accent);
+        }
+        .about h2 {
+            font-size: 4rem;
+            font-weight: 200;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+        .about h3 { font-size: 1.2rem; color: var(--accent); font-weight: 300; margin-bottom: 2rem; }
+        .about p { color: var(--text-muted); line-height: 2; margin-bottom: 1.5rem; }
+        .stats { display: flex; gap: 4rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(201,169,98,0.2); }
+        .stat { text-align: center; }
+        .stat-num { font-size: 3rem; color: var(--accent); font-weight: bold; }
+        .stat-label { font-size: 0.8rem; color: var(--text-muted); letter-spacing: 0.1rem; }
+        
+        /* Philosophy Section - 6 Cards Grid */
+        #philosophy { background: var(--secondary); }
+        .section-header { text-align: center; margin-bottom: 5rem; }
+        .section-label { color: var(--accent); letter-spacing: 0.5rem; font-size: 0.85rem; margin-bottom: 1rem; }
+        .section-title { font-size: 3rem; font-weight: 200; }
+        
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .philosophy-card {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .philosophy-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7) contrast(1.1);
+            transition: 0.5s;
+        }
+        .philosophy-card:hover img { transform: scale(1.1); filter: brightness(0.9); }
+        .philosophy-card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+        }
+        .philosophy-card h4 { font-size: 1.8rem; font-weight: 200; margin-bottom: 0.3rem; }
+        .philosophy-card p { font-size: 0.85rem; color: var(--accent); letter-spacing: 0.2rem; }
+        
+        /* Systems Section */
+        #systems { background: var(--primary); }
+        .systems-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+        .system-card {
+            padding: 3rem 2rem;
+            background: var(--secondary);
+            border: 1px solid rgba(201,169,98,0.1);
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        .system-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--accent);
+            transition: 0.4s;
+        }
+        .system-card:hover { border-color: var(--accent); transform: translateY(-10px); }
+        .system-card:hover::before { height: 100%; }
+        .system-num { font-size: 4rem; color: rgba(201,169,98,0.15); font-weight: bold; line-height: 1; margin-bottom: -1rem; }
+        .system-card h4 { font-size: 1.4rem; margin-bottom: 1rem; color: var(--accent); }
+        .system-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; }
+        
+        /* Workflow Section */
+        #workflow { background: var(--secondary); }
+        .workflow-track {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            padding: 2rem 0;
+        }
+        .workflow-track::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            right: 5%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+        .workflow-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .step-circle {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            border: 2px solid var(--tiffany);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            color: var(--tiffany);
+        }
+        .workflow-step h4 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .workflow-step p { font-size: 0.8rem; color: var(--text-muted); }
+        
+        /* Equipment Section */
+        #equipment { background: var(--primary); }
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        .equipment-card {
+            display: flex;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: var(--secondary);
+            border-left: 3px solid var(--accent);
+        }
+        .equipment-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(201,169,98,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .equipment-icon i { font-size: 1.5rem; color: var(--accent); }
+        .equipment-card h4 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .equipment-card p { font-size: 0.85rem; color: var(--text-muted); }
+        
+        /* Value Section */
+        #value { background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%); }
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        .value-card {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            background: rgba(201,169,98,0.05);
+            border: 1px solid rgba(201,169,98,0.1);
+            transition: 0.3s;
+        }
+        .value-card:hover { background: rgba(201,169,98,0.1); transform: translateY(-5px); }
+        .value-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        .value-icon i { font-size: 1.5rem; color: var(--primary); }
+        .value-card h4 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .value-card p { font-size: 0.8rem; color: var(--text-muted); }
+        
+        /* 蒂芙尼蓝点缀 */
+        .value-card.tiffany { border-color: var(--tiffany); }
+        .value-card.tiffany .value-icon { background: var(--tiffany); }
+        .value-card.tiffany:hover { background: rgba(129,220,235,0.1); }
+        
+        /* 萝卜丁红点缀 */
+        .value-card.louboutin { border-color: var(--louboutin); }
+        .value-card.louboutin .value-icon { background: var(--louboutin); }
+        .value-card.louboutin:hover { background: rgba(238,29,35,0.1); }
+        
+        /* Contact Section */
+        #contact { background: var(--secondary); text-align: center; }
+        .contact-wrap {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 4rem;
+            border: 1px solid rgba(201,169,98,0.2);
+            position: relative;
+        }
+        .contact-wrap::before, .contact-wrap::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+        }
+        .contact-wrap::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+        .contact-wrap::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+        .contact-wrap h3 { font-size: 2.5rem; font-weight: 200; margin-bottom: 1rem; }
+        .contact-wrap p { color: var(--text-muted); margin-bottom: 2rem; }
+        .contact-info { display: flex; justify-content: center; gap: 3rem; }
+        .contact-item { text-align: center; }
+        .contact-item i { color: var(--accent); font-size: 1.2rem; margin-bottom: 0.5rem; display: block; }
+        
+        /* Footer */
+        footer {
+            background: var(--primary);
+            text-align: center;
+            padding: 3rem;
+            border-top: 1px solid rgba(201,169,98,0.1);
+        }
+        footer p { color: var(--text-muted); font-size: 0.85rem; }
+        footer .brand { color: var(--accent); font-size: 1.2rem; margin-bottom: 0.5rem; }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 4rem; }
+            .about-grid, .philosophy-grid, .systems-grid, .equipment-grid, .value-grid { grid-template-columns: 1fr; }
+            .workflow-track { flex-wrap: wrap; gap: 2rem; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">FENTTI <span>CASA</span></div>
+        <ul>
+            <li><a href="#about">关于</a></li>
+            <li><a href="#philosophy">理念</a></li>
+            <li><a href="#systems">系统</a></li>
+            <li><a href="#workflow">流程</a></li>
+            <li><a href="#equipment">设备</a></li>
+            <li><a href="#value">价值</a></li>
+            <li><a href="#contact">联系</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="geo-shape geo-1"></div>
+        <div class="geo-shape geo-2"></div>
+        <div class="geo-shape geo-3"></div>
+        <div class="geo-shape geo-4"></div>
+        
+        <div class="hero-content">
+            <h1>墨非</h1>
+            <p class="subtitle">MOFEI · FENTTI CASA</p>
+            <p class="tagline">后时代墨非装饰主义 · 全链路数字工业设计生产落地闭环系统<br>珠宝级建筑家具 · 为全球1%的灵魂定制艺术避难所</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="about-grid">
+            <div class="about-img-wrap">
+                <img src="mofei-website-images/images/all/墨非设计师形像照片.png" alt="墨非" class="about-img">
+                <div class="about-img-frame"></div>
+            </div>
+            <div class="about">
+                <span class="about-label">DESIGNER</span>
+                <h2>墨非</h2>
+                <h3>MOFEI · 后时代墨非装饰主义创始人</h3>
+                <p>1979年出生，中国知名家具设计师，深耕室内设计、铝制品定制与木作行业15年。</p>
+                <p>将古典文学底蕴与现代工业设计完美结合，创立FENTTI CASA高端定制品牌，致力于打造"珠宝级建筑家具"。</p>
+                <p>2019年担任联邦设计总监，拥有250㎡工作室和300㎡厂房，打通设计、生产、安装全流程。</p>
+                <div class="stats">
+                    <div class="stat"><div class="stat-num">15+</div><div class="stat-label">YEARS EXPERIENCE</div></div>
+                    <div class="stat"><div class="stat-num">250㎡</div><div class="stat-label">STUDIO</div></div>
+                    <div class="stat"><div class="stat-num">300㎡</div><div class="stat-label">FACTORY</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section id="philosophy">
+        <div class="section-header">
+            <p class="section-label">PHILOSOPHY</p>
+            <h2 class="section-title">后时代墨非装饰主义</h2>
+        </div>
+        <div class="philosophy-grid">
+            <div class="philosophy-card">
+                <img src="mofei-website-images/images/all/解构.png" alt="解构">
+                <div class="philosophy-card-content">
+                    <h4>解构</h4>
+                    <p>DECONSTRUCTION</p>
+                </div>
+            </div>
+            <div class="philosophy-card">
+                <img src="mofei-website-images/images/all/秩序.png" alt="秩序">
+                <div class="philosophy-card-content">
+                    <h4>秩序</h4>
+                    <p>ORDER</p>
+                </div>
+            </div>
+            <div class="philosophy-card">
+                <img src="mofei-website-images/images/all/重建.png" alt="重建">
+                <div class="philosophy-card-content">
+                    <h4>重建</h4>
+                    <p>RECONSTRUCTION</p>
+                </div>
+            </div>
+            <div class="philosophy-card">
+                <img src="mofei-website-images/images/all/无界.png" alt="无界">
+                <div class="philosophy-card-content">
+                    <h4>无界</h4>
+                    <p>BOUNDLESS</p>
+                </div>
+            </div>
+            <div class="philosophy-card">
+                <img src="mofei-website-images/images/all/融合.png" alt="融合">
+                <div class="philosophy-card-content">
+                    <h4>融合</h4>
+                    <p>INTEGRATION</p>
+                </div>
+            </div>
+            <div class="philosophy-card">
+                <img src="mofei-website-images/images/all/本真.png" alt="本真">
+                <div class="philosophy-card-content">
+                    <h4>本真</h4>
+                    <p>AUTHENTICITY</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Systems Section -->
+    <section id="systems">
+        <div class="section-header">
+            <p class="section-label">CORE SYSTEMS</p>
+            <h2 class="section-title">三大核心系统</h2>
+        </div>
+        <div class="systems-grid">
+            <div class="system-card">
+                <div class="system-num">01</div>
+                <h4>有机骨架系统</h4>
+                <p>CNC高精工艺驱动的异形五金与曲线重构，打破传统家具的方正界限，让每一件家具都拥有生命的律动感。</p>
+            </div>
+            <div class="system-card">
+                <div class="system-num">02</div>
+                <h4>感官材质宣言</h4>
+                <p>跨界金属涂装与顶级材质应用，将BVLGARI熔金技术、皮钢共生技术融入家居空间。</p>
+            </div>
+            <div class="system-card">
+                <div class="system-num">03</div>
+                <h4>智能呼吸系统</h4>
+                <p>空间情绪调节与场景化沉浸灯效，让家具能够感知居住者的情绪，实现"感官进化论"。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow Section -->
+    <section id="workflow">
+        <div class="section-header">
+            <p class="section-label">WORKFLOW</p>
+            <h2 class="section-title">全链路闭环流程</h2>
+        </div>
+        <div class="workflow-track">
+            <div class="workflow-step">
+                <div class="step-circle"><i class="fas fa-brain"></i></div>
+                <h4>美学创意</h4>
+                <p>AI算力生成</p>
+            </div>
+            <div class="workflow-step">
+                <div class="step-circle"><i class="fas fa-pencil-ruler"></i></div>
+                <h4>数字精修</h4>
+                <p>专业建模渲染</p>
+            </div>
+            <div class="workflow-step">
+                <div class="step-circle"><i class="fas fa-tools"></i></div>
+                <h4>现场优化</h4>
+                <p>iPad Pro勘测</p>
+            </div>
+            <div class="workflow-step">
+                <div class="step-circle"><i class="fas fa-industry"></i></div>
+                <h4>工业生产</h4>
+                <p>CNC加工</p>
+            </div>
+            <div class="workflow-step">
+                <div class="step-circle"><i class="fas fa-check-circle"></i></div>
+                <h4>展示交付</h4>
+                <p>AR+成品</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Equipment Section -->
+    <section id="equipment">
+        <div class="section-header">
+            <p class="section-label">EQUIPMENT</p>
+            <h2 class="section-title">核心设备矩阵</h2>
+        </div>
+        <div class="equipment-grid">
+            <div class="equipment-card">
+                <div class="equipment-icon"><i class="fas fa-server"></i></div>
+                <div>
+                    <h4>AI创意算力中枢</h4>
+                    <p>Windows RTX3060 笔记本 - 稳定运行Stable Diffusion等AI设计工具</p>
+                </div>
+            </div>
+            <div class="equipment-card">
+                <div class="equipment-icon"><i class="fas fa-laptop"></i></div>
+                <div>
+                    <h4>数字设计渲染核心</h4>
+                    <p>MacBook Pro A2141 无头版 - 高精度建模、工程图纸绘制、材质效果渲染</p>
+                </div>
+            </div>
+            <div class="equipment-card">
+                <div class="equipment-icon"><i class="fas fa-tablet-alt"></i></div>
+                <div>
+                    <h4>现场交互优化终端</h4>
+                    <p>iPad Pro 12.9英寸 - 现场勘测拍照、设计方案手绘批注</p>
+                </div>
+            </div>
+            <div class="equipment-card">
+                <div class="equipment-icon"><i class="fas fa-cogs"></i></div>
+                <div>
+                    <h4>工业生产落地载体</h4>
+                    <p>自有CNC铝制板式生产设备 - 自动化加工、组装</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Section -->
+    <section id="value">
+        <div class="section-header">
+            <p class="section-label">VALUE</p>
+            <h2 class="section-title" style="color: #fff;">核心商业价值</h2>
+        </div>
+        <div class="value-grid">
+            <div class="value-card tiffany">
+                <div class="value-icon"><i class="fas fa-gem"></i></div>
+                <h4>差异化美学</h4>
+                <p>后时代墨非装饰主义</p>
+            </div>
+            <div class="value-card louboutin">
+                <div class="value-icon"><i class="fas fa-bolt"></i></div>
+                <h4>效率升级</h4>
+                <p>双平台数字协同</p>
+            </div>
+            <div class="value-card tiffany">
+                <div class="value-icon"><i class="fas fa-industry"></i></div>
+                <h4>全自控生产</h4>
+                <p>自有CNC设备</p>
+            </div>
+            <div class="value-card louboutin">
+                <div class="value-icon"><i class="fas fa-handshake"></i></div>
+                <h4>一站式交付</h4>
+                <p>全链路服务</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="contact-wrap">
+            <h3>开启您的定制之旅</h3>
+            <p>为全球1%的灵魂定制艺术避难所</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>155 5552 2212</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>浙江省温岭市城东街道萧南村曾家55号</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p class="brand">FENTTI CASA</p>
+        <p>墨非 MOFEI © 2026 后时代墨非装饰主义 · 珠宝级建筑家具</p>
+    </footer>
+</body>
+</html>
